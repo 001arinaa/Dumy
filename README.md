@@ -48,3 +48,23 @@
 | **Мова програмування** | C# |
 | **Фреймворк UI** | .NET / WPF |
 | **База даних & ORM** | SQLite / Entity Framework Core (ADO.NET) |
+
+---
+
+### Структура репозиторію
+- `DumyWPF.slnx` — файл рішення
+- `DumyWPF/` — WPF-проєкт
+  - `Data/` — DbContext, робота з SQLite
+  - `Models/` — UserProfile, MoodEntry, Practice, HabitLog
+  - `Services/` — бізнес-логіка
+  - `ViewModels/` — шар MVVM
+  - `Views/` — XAML-екрани
+- `Документи/` — документація етапів 1–4
+
+---
+
+### Як запустити
+1. Встановити Visual Studio з «.NET desktop development» та .NET 10 SDK
+2. Клонувати репозиторій
+3. Відкрити `DumyWPF.slnx`
+4. Натиснути F5
