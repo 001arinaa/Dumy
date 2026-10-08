@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="DumyWPF.Views.DailyBalanceView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             FontFamily="Segoe UI"
              Background="#F5F2ED">
 
     <UserControl.Resources>
@@ -46,10 +47,10 @@
         <Border DockPanel.Dock="Top" Background="White" Padding="30,12" BorderBrush="#EAE6DF" BorderThickness="0,0,0,1">
             <Grid>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="DUMY" FontFamily="Georgia" FontSize="20" FontWeight="Bold" Foreground="#25190E"/>
-                    <TextBlock Text=" v1.0" FontSize="18" FontFamily="Georgia" Foreground="#C4C0B8"/>
+                    <TextBlock Text="DUMY" FontFamily="Georgia" FontSize="22" FontWeight="Bold" Foreground="#25190E"/>
+                    <TextBlock Text=" v1.0" FontFamily="Georgia" FontSize="18" Foreground="#C4C0B8"/>
                     <Border Background="#DAB6C8" CornerRadius="4" Padding="6,2" Margin="8,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="MVP" FontSize="10" FontWeight="Bold" Foreground="White"/>
+                        <TextBlock Text="MVP" FontFamily="Segoe UI" FontSize="10" FontWeight="Bold" Foreground="White"/>
                     </Border>
                 </StackPanel>
 
@@ -61,9 +62,17 @@
                             <TextBlock Text=" ∨" FontSize="10" Foreground="#C4C0B8" Margin="4,0,0,0"/>
                         </StackPanel>
                     </Border>
-                    <Border Background="#FBF9F5" CornerRadius="15" Width="30" Height="30" BorderBrush="#EAE6DF" BorderThickness="1">
+
+                    <!-- Шестірня налаштувань -->
+                    <Button Command="{Binding NavigateSettingsCommand}" Width="30" Height="30" 
+                            Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" Cursor="Hand">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Button.Resources>
                         <TextBlock Text="⚙" FontFamily="Segoe UI Emoji" FontSize="13" Foreground="#25190E" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Border>
@@ -72,7 +81,11 @@
         <StackPanel DockPanel.Dock="Bottom" Margin="0,15,0,15" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
                 <TextBlock Text="🧘 Переглянути бібліотеку практик" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#25190E" Cursor="Hand" Margin="0,0,20,0"/>
-                <TextBlock Text="📊 Історія" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#25190E" Cursor="Hand"/>
+
+                <!-- Перехід в історію -->
+                <Button Command="{Binding NavigateHistoryCommand}" Background="Transparent" BorderThickness="0" Cursor="Hand">
+                    <TextBlock Text="📊 Історія" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#25190E"/>
+                </Button>
             </StackPanel>
             <TextBlock Text="Dumy v1.0 (MVP) піклується про вашу конфіденційність. Усі введені дані зберігаються локально." 
                        FontSize="10" Foreground="#C4C0B8" HorizontalAlignment="Center"/>
@@ -82,7 +95,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="35,20">
 
-                <!-- ДУМКА ДНЯ (ВИДІЛЕНО РОЖЕВИМ #F5E8EF ТА #DAB6C8) -->
+                <!-- ДУМКА ДНЯ -->
                 <Border Background="#F5E8EF" BorderBrush="#DAB6C8" BorderThickness="1" CornerRadius="14" Padding="20,16" Margin="0,0,0,20">
                     <Grid>
                         <StackPanel>
@@ -114,36 +127,91 @@
                                     <TextBlock Text="ЯК ВИ ПОЧУВАЄТЕСЬ ЗАРАЗ?" FontWeight="Bold" FontSize="13" Foreground="#25190E"/>
                                 </StackPanel>
 
-                                <!-- КАРТКИ НАСТРОЮ -->
+                                <!-- КАРТКИ НАСТРОЮ (ІНТЕРАКТИВНІ) -->
                                 <UniformGrid Columns="4" Margin="0,0,0,18">
-                                    <!-- Активна картка (Спокій) -->
-                                    <Border Background="#F5E8EF" BorderBrush="#DAB6C8" BorderThickness="1.5" CornerRadius="12" Padding="8,12" Margin="3">
-                                        <StackPanel HorizontalAlignment="Center">
-                                            <TextBlock Text="😊" FontFamily="Segoe UI Emoji" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
-                                            <TextBlock Text="Спокій" FontSize="11" FontWeight="Bold" Foreground="#25190E" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Border>
+                                    <!-- Спокій -->
+                                    <RadioButton GroupName="MoodGroup" IsChecked="True" Cursor="Hand" Margin="3">
+                                        <RadioButton.Template>
+                                            <ControlTemplate TargetType="RadioButton">
+                                                <Border x:Name="border" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12">
+                                                    <StackPanel HorizontalAlignment="Center">
+                                                        <TextBlock Text="😊" FontFamily="Segoe UI Emoji" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                                                        <TextBlock Text="Спокій" FontSize="11" FontWeight="Bold" Foreground="#25190E" HorizontalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="#F5E8EF"/>
+                                                        <Setter TargetName="border" Property="BorderBrush" Value="#DAB6C8"/>
+                                                        <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </RadioButton.Template>
+                                    </RadioButton>
+
                                     <!-- Тривога -->
-                                    <Border Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12" Margin="3">
-                                        <StackPanel HorizontalAlignment="Center">
-                                            <TextBlock Text="😟" FontFamily="Segoe UI Emoji" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
-                                            <TextBlock Text="Тривога" FontSize="11" Foreground="#332418" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Border>
+                                    <RadioButton GroupName="MoodGroup" Cursor="Hand" Margin="3">
+                                        <RadioButton.Template>
+                                            <ControlTemplate TargetType="RadioButton">
+                                                <Border x:Name="border" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12">
+                                                    <StackPanel HorizontalAlignment="Center">
+                                                        <TextBlock Text="😟" FontFamily="Segoe UI Emoji" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                                                        <TextBlock Text="Тривога" FontSize="11" FontWeight="SemiBold" Foreground="#332418" HorizontalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="#F5E8EF"/>
+                                                        <Setter TargetName="border" Property="BorderBrush" Value="#DAB6C8"/>
+                                                        <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </RadioButton.Template>
+                                    </RadioButton>
+
                                     <!-- Втома -->
-                                    <Border Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12" Margin="3">
-                                        <StackPanel HorizontalAlignment="Center">
-                                            <TextBlock Text="😫" FontFamily="Segoe UI Emoji" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
-                                            <TextBlock Text="Втома" FontSize="11" Foreground="#332418" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Border>
+                                    <RadioButton GroupName="MoodGroup" Cursor="Hand" Margin="3">
+                                        <RadioButton.Template>
+                                            <ControlTemplate TargetType="RadioButton">
+                                                <Border x:Name="border" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12">
+                                                    <StackPanel HorizontalAlignment="Center">
+                                                        <TextBlock Text="😫" FontFamily="Segoe UI Emoji" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                                                        <TextBlock Text="Втома" FontSize="11" FontWeight="SemiBold" Foreground="#332418" HorizontalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="#F5E8EF"/>
+                                                        <Setter TargetName="border" Property="BorderBrush" Value="#DAB6C8"/>
+                                                        <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </RadioButton.Template>
+                                    </RadioButton>
+
                                     <!-- Дратування -->
-                                    <Border Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12" Margin="3">
-                                        <StackPanel HorizontalAlignment="Center">
-                                            <TextBlock Text="😡" FontFamily="Segoe UI Emoji" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
-                                            <TextBlock Text="Дратування" FontSize="11" Foreground="#332418" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Border>
+                                    <RadioButton GroupName="MoodGroup" Cursor="Hand" Margin="3">
+                                        <RadioButton.Template>
+                                            <ControlTemplate TargetType="RadioButton">
+                                                <Border x:Name="border" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12">
+                                                    <StackPanel HorizontalAlignment="Center">
+                                                        <TextBlock Text="😡" FontFamily="Segoe UI Emoji" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                                                        <TextBlock Text="Дратування" FontSize="11" FontWeight="SemiBold" Foreground="#332418" HorizontalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="#F5E8EF"/>
+                                                        <Setter TargetName="border" Property="BorderBrush" Value="#DAB6C8"/>
+                                                        <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </RadioButton.Template>
+                                    </RadioButton>
                                 </UniformGrid>
 
                                 <Grid Margin="0,0,0,8">
