@@ -1,6 +1,5 @@
-﻿using System.Windows;
+using System.Windows;
 using DumyWPF.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace DumyWPF
 {
@@ -11,10 +10,15 @@ namespace DumyWPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            // Створює dumy.db і застосовує міграції (разом із 18 практиками) при першому запуску
-            using (var db = new AppDbContext())
+            try
             {
-                db.Database.EnsureCreated();
+                // Створює dumy.db з 18 практиками та таблицю звичок (якщо її ще немає)
+                DatabaseInitializer.Initialize();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не вдалося ініціалізувати базу даних:\n" + ex.Message,
+                    "Dumy", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             base.OnStartup(e);

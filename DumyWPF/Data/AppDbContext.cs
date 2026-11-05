@@ -9,6 +9,7 @@ namespace DumyWPF.Data
     {
         public DbSet<Practice> Practices => Set<Practice>();
         public DbSet<MoodEntry> MoodEntries => Set<MoodEntry>();
+        public DbSet<HabitLog> HabitLogs => Set<HabitLog>();
 
         public AppDbContext() { }
 
@@ -47,6 +48,12 @@ namespace DumyWPF.Data
             {
                 e.HasKey(m => m.Id);
                 e.Property(m => m.EmotionState).IsRequired();
+            });
+
+            modelBuilder.Entity<HabitLog>(e =>
+            {
+                e.HasKey(h => h.Id);
+                e.Property(h => h.HabitName).IsRequired();
             });
 
             // Seeding: 18 практик зі стартової бібліотеки контенту

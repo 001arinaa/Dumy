@@ -39,5 +39,12 @@ namespace DumyWPF.Services
                 .Where(p => p.ProfileTag == profileTag && p.TargetState == targetState)
                 .OrderBy(p => p.Id).ToListAsync();
         }
+
+        /// <summary>Одна практика за точною назвою (або null).</summary>
+        public async Task<Practice?> GetByTitleAsync(string title)
+        {
+            using var db = new AppDbContext();
+            return await db.Practices.AsNoTracking().FirstOrDefaultAsync(p => p.Title == title);
+        }
     }
 }

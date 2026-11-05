@@ -80,7 +80,11 @@
         <!-- 2. НИЖНІЙ ФУТЕР -->
         <StackPanel DockPanel.Dock="Bottom" Margin="0,15,0,15" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
-                <TextBlock Text="🧘 Переглянути бібліотеку практик" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#25190E" Cursor="Hand" Margin="0,0,20,0"/>
+                <TextBlock Text="🧘 Переглянути бібліотеку практик" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#25190E" Cursor="Hand" Margin="0,0,20,0">
+                    <TextBlock.InputBindings>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding NavigateLibraryCommand}"/>
+                    </TextBlock.InputBindings>
+                </TextBlock>
 
                 <!-- Перехід в історію -->
                 <Button Command="{Binding NavigateHistoryCommand}" Background="Transparent" BorderThickness="0" Cursor="Hand">
@@ -130,7 +134,7 @@
                                 <!-- КАРТКИ НАСТРОЮ (ІНТЕРАКТИВНІ) -->
                                 <UniformGrid Columns="4" Margin="0,0,0,18">
                                     <!-- Спокій -->
-                                    <RadioButton GroupName="MoodGroup" IsChecked="True" Cursor="Hand" Margin="3">
+                                    <RadioButton GroupName="MoodGroup" IsChecked="{Binding IsCalm}" Cursor="Hand" Margin="3">
                                         <RadioButton.Template>
                                             <ControlTemplate TargetType="RadioButton">
                                                 <Border x:Name="border" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12">
@@ -151,7 +155,7 @@
                                     </RadioButton>
 
                                     <!-- Тривога -->
-                                    <RadioButton GroupName="MoodGroup" Cursor="Hand" Margin="3">
+                                    <RadioButton GroupName="MoodGroup" IsChecked="{Binding IsAnxious}" Cursor="Hand" Margin="3">
                                         <RadioButton.Template>
                                             <ControlTemplate TargetType="RadioButton">
                                                 <Border x:Name="border" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12">
@@ -172,7 +176,7 @@
                                     </RadioButton>
 
                                     <!-- Втома -->
-                                    <RadioButton GroupName="MoodGroup" Cursor="Hand" Margin="3">
+                                    <RadioButton GroupName="MoodGroup" IsChecked="{Binding IsTired}" Cursor="Hand" Margin="3">
                                         <RadioButton.Template>
                                             <ControlTemplate TargetType="RadioButton">
                                                 <Border x:Name="border" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12">
@@ -193,7 +197,7 @@
                                     </RadioButton>
 
                                     <!-- Дратування -->
-                                    <RadioButton GroupName="MoodGroup" Cursor="Hand" Margin="3">
+                                    <RadioButton GroupName="MoodGroup" IsChecked="{Binding IsIrritated}" Cursor="Hand" Margin="3">
                                         <RadioButton.Template>
                                             <ControlTemplate TargetType="RadioButton">
                                                 <Border x:Name="border" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="8,12">
@@ -216,10 +220,10 @@
 
                                 <Grid Margin="0,0,0,8">
                                     <TextBlock Text="Рівень інтенсивності:" FontSize="11" Foreground="#C4C0B8" VerticalAlignment="Center"/>
-                                    <TextBlock Text="Помірно (5 з 10)" FontSize="11" FontWeight="Bold" Foreground="#25190E" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding IntensityText}" FontSize="11" FontWeight="Bold" Foreground="#25190E" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                 </Grid>
 
-                                <Slider Minimum="1" Maximum="10" Value="5" Margin="0,0,0,5"/>
+                                <Slider Minimum="1" Maximum="10" Value="{Binding Intensity, Mode=TwoWay}" IsSnapToTickEnabled="True" TickFrequency="1" Margin="0,0,0,5"/>
                             </StackPanel>
                         </Border>
 
@@ -239,12 +243,29 @@
                             <StackPanel>
                                 <TextBlock Text="ЩОДЕННИК ДУМОК" FontWeight="Bold" FontSize="13" Foreground="#25190E" Margin="0,0,0,12"/>
                                 <Border BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="12" Background="#FBF9F5" Margin="0,0,0,10">
-                                    <TextBox Height="90" TextWrapping="Wrap" AcceptsReturn="True" BorderThickness="0"
-                                             Background="Transparent" FontSize="12" Foreground="#332418" Text="Додати вільний запис думок або нотатку..."/>
+                                    <Grid>
+                                        <TextBox x:Name="NotesBox" Height="90" TextWrapping="Wrap" AcceptsReturn="True" BorderThickness="0"
+                                                 Background="Transparent" FontSize="12" Foreground="#332418"
+                                                 Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBlock Text="Додати вільний запис думок або нотатку..." FontSize="12" Foreground="#C4C0B8"
+                                                   IsHitTestVisible="False" Margin="2,0,0,0">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Text, ElementName=NotesBox}" Value="">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Grid>
                                 </Border>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="📊 " FontFamily="Segoe UI Emoji" FontSize="11"/>
-                                    <TextBlock Text="Збережено записів цього тижня: 5" FontSize="10" Foreground="#C4C0B8"/>
+                                    <TextBlock Text="{Binding WeekEntriesText}" FontSize="10" Foreground="#C4C0B8"/>
+                                    <TextBlock Text="{Binding StatusMessage}" FontSize="10" FontWeight="Bold" Foreground="#25190E" Margin="12,0,0,0"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -262,22 +283,22 @@
                                     <TextBlock Text="Сьогоднішній фокус" FontSize="10" Foreground="#C4C0B8" HorizontalAlignment="Right"/>
                                 </Grid>
 
-                                <TextBlock Text="3-хвилинне дихання для балансу" FontWeight="Bold" FontSize="15" Foreground="#25190E" Margin="0,0,0,6"/>
-                                <TextBlock Text="Проста, але потужна техніка для зниження тонусу нервової системи та фокусування думок на теперішньому моменті." 
+                                <TextBlock Text="{Binding RecommendedTitle}" FontWeight="Bold" FontSize="15" Foreground="#25190E" Margin="0,0,0,6"/>
+                                <TextBlock Text="{Binding RecommendedSummary}" 
                                            FontSize="11" Foreground="#332418" TextWrapping="Wrap" Margin="0,0,0,12"/>
 
                                 <StackPanel Margin="0,0,0,15">
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                                         <TextBlock Text="⏱ " FontFamily="Segoe UI Emoji" FontSize="11"/>
-                                        <TextBlock Text="Тривалість: 3 хв" FontSize="11" Foreground="#332418"/>
+                                        <TextBlock Text="{Binding RecommendedDuration}" FontSize="11" Foreground="#332418"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="🌿 " FontFamily="Segoe UI Emoji" FontSize="11"/>
-                                        <TextBlock Text="Тип: Дихальна вправа" FontSize="11" Foreground="#332418"/>
+                                        <TextBlock Text="{Binding RecommendedType}" FontSize="11" Foreground="#332418"/>
                                     </StackPanel>
                                 </StackPanel>
 
-                                <Button Content="Розпочати  ➔" Width="110" Height="32" HorizontalAlignment="Right" 
+                                <Button Content="Розпочати  ➔" Command="{Binding StartRecommendedCommand}" Width="110" Height="32" HorizontalAlignment="Right" 
                                         Background="#DAB6C8" Foreground="#25190E" FontWeight="Bold" FontSize="11" BorderThickness="0" Cursor="Hand">
                                     <Button.Resources>
                                         <Style TargetType="Border">
@@ -300,10 +321,10 @@
                                             <TextBlock Text="💧" FontFamily="Segoe UI Emoji" FontSize="14" Margin="0,0,8,0"/>
                                             <StackPanel>
                                                 <TextBlock Text="Вода" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
-                                                <TextBlock Text="1.2 л з 2.0 л" FontSize="10" Foreground="#C4C0B8"/>
+                                                <TextBlock Text="{Binding Habits.Water.Subtitle}" FontSize="10" Foreground="#C4C0B8"/>
                                             </StackPanel>
                                         </StackPanel>
-                                        <CheckBox IsChecked="True" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <CheckBox IsChecked="{Binding Habits.Water.IsCompleted, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                     </Grid>
                                 </Border>
 
@@ -314,10 +335,10 @@
                                             <TextBlock Text="😴" FontFamily="Segoe UI Emoji" FontSize="14" Margin="0,0,8,0"/>
                                             <StackPanel>
                                                 <TextBlock Text="Сон" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
-                                                <TextBlock Text="7.5 год з 8.0 год" FontSize="10" Foreground="#C4C0B8"/>
+                                                <TextBlock Text="{Binding Habits.Sleep.Subtitle}" FontSize="10" Foreground="#C4C0B8"/>
                                             </StackPanel>
                                         </StackPanel>
-                                        <CheckBox IsChecked="True" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <CheckBox IsChecked="{Binding Habits.Sleep.IsCompleted, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                     </Grid>
                                 </Border>
 
@@ -328,10 +349,10 @@
                                             <TextBlock Text="🎯" FontFamily="Segoe UI Emoji" FontSize="14" Margin="0,0,8,0"/>
                                             <StackPanel>
                                                 <TextBlock Text="Фокус" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
-                                                <TextBlock Text="2 сесії виконано" FontSize="10" Foreground="#C4C0B8"/>
+                                                <TextBlock Text="{Binding Habits.Focus.Subtitle}" FontSize="10" Foreground="#C4C0B8"/>
                                             </StackPanel>
                                         </StackPanel>
-                                        <CheckBox IsChecked="False" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <CheckBox IsChecked="{Binding Habits.Focus.IsCompleted, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                     </Grid>
                                 </Border>
                             </StackPanel>

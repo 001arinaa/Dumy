@@ -44,10 +44,11 @@
 
                     <!-- Картка 1: Щоденний баланс -->
                     <Border Grid.Column="0" Background="#FBF9F5" BorderBrush="#DAB6C8" BorderThickness="1.5" CornerRadius="12" Padding="10">
+                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding SelectDailyCommand}"/></Border.InputBindings>
                         <StackPanel>
                             <Grid Margin="0,0,0,10">
                                 <TextBlock Text="🤍" FontSize="14" HorizontalAlignment="Left"/>
-                                <RadioButton IsChecked="True" GroupName="Mode" HorizontalAlignment="Right"/>
+                                <RadioButton IsChecked="{Binding IsDailyMode}" GroupName="Mode" HorizontalAlignment="Right"/>
                             </Grid>
                             <TextBlock Text="Щоденний баланс" FontSize="11" FontWeight="Bold" Foreground="#25190E" TextWrapping="Wrap" Margin="0,0,0,4"/>
                             <TextBlock Text="Підтримка загальної гармонії та усвідомленості день за днем." FontSize="9" Foreground="#9AA3B6" TextWrapping="Wrap"/>
@@ -56,10 +57,11 @@
 
                     <!-- Картка 2: Відновлення та фокус -->
                     <Border Grid.Column="2" Background="White" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="10">
+                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding SelectFocusCommand}"/></Border.InputBindings>
                         <StackPanel>
                             <Grid Margin="0,0,0,10">
                                 <TextBlock Text="⚙" FontSize="14" HorizontalAlignment="Left"/>
-                                <RadioButton GroupName="Mode" HorizontalAlignment="Right"/>
+                                <RadioButton IsChecked="{Binding IsFocusMode}" GroupName="Mode" HorizontalAlignment="Right"/>
                             </Grid>
                             <TextBlock Text="Відновлення та фокус" FontSize="11" FontWeight="Bold" Foreground="#25190E" TextWrapping="Wrap" Margin="0,0,0,4"/>
                             <TextBlock Text="Зниження стресу, покращення сну та продуктивності." FontSize="9" Foreground="#9AA3B6" TextWrapping="Wrap"/>
@@ -68,10 +70,11 @@
 
                     <!-- Картка 3: Тактичний -->
                     <Border Grid.Column="4" Background="White" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="10">
+                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding SelectTacticalCommand}"/></Border.InputBindings>
                         <StackPanel>
                             <Grid Margin="0,0,0,10">
                                 <TextBlock Text="🛡" FontSize="14" HorizontalAlignment="Left"/>
-                                <RadioButton GroupName="Mode" HorizontalAlignment="Right"/>
+                                <RadioButton IsChecked="{Binding IsTacticalMode}" GroupName="Mode" HorizontalAlignment="Right"/>
                             </Grid>
                             <TextBlock Text="Тактичний" FontSize="11" FontWeight="Bold" Foreground="#25190E" TextWrapping="Wrap" Margin="0,0,0,4"/>
                             <TextBlock Text="Швидка самодопомога у моменти тривоги чи гострого стресу." FontSize="9" Foreground="#9AA3B6" TextWrapping="Wrap"/>
