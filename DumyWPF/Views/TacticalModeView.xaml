@@ -63,6 +63,7 @@
                         </StackPanel>
                     </Border>
                     <Border Background="#2D2A28" CornerRadius="15" Width="30" Height="30" BorderBrush="#383431" BorderThickness="1">
+                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding NavigateSettingsCommand}"/></Border.InputBindings>
                         <TextBlock Text="⚙" FontFamily="Segoe UI Emoji" FontSize="13" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </StackPanel>
@@ -71,7 +72,10 @@
 
         <!-- 2. НИЖНІЙ ФУТЕР -->
         <StackPanel DockPanel.Dock="Bottom" Margin="0,15,0,15" HorizontalAlignment="Center">
-            <TextBlock Text="📊 Історія заземлень та звітність" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#A3A075" Cursor="Hand" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+            <TextBlock Text="📊 Історія заземлень та звітність" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#A3A075" Cursor="Hand" HorizontalAlignment="Center" Margin="0,0,0,8">
+                <TextBlock.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding NavigateHistoryCommand}"/></TextBlock.InputBindings>
+            </TextBlock>
+            <TextBlock Text="{Binding StatusMessage}" FontSize="11" FontWeight="Bold" Foreground="#A3A075" HorizontalAlignment="Center" Margin="0,0,0,8"/>
             <TextBlock Text="Dumy v1.0 (MVP) піклується про вашу конфіденційність. Усі введені дані зберігаються локально на цьому пристрої." 
                        FontSize="10" Foreground="#6E6A65" HorizontalAlignment="Center"/>
         </StackPanel>
@@ -132,6 +136,7 @@
                                            FontSize="10" Foreground="#8E8A85" TextWrapping="Wrap"/>
                             </StackPanel>
                             <Border Width="36" Height="36" CornerRadius="18" Background="#A3A075" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
+                                <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding PlayBreathingCommand}"/></Border.InputBindings>
                                 <TextBlock Text="▷" FontSize="13" Foreground="#181615" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0"/>
                             </Border>
                         </Grid>
@@ -149,6 +154,7 @@
                                            FontSize="10" Foreground="#8E8A85" TextWrapping="Wrap"/>
                             </StackPanel>
                             <Border Width="36" Height="36" CornerRadius="18" Background="#A3A075" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
+                                <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding PlayGroundingCommand}"/></Border.InputBindings>
                                 <TextBlock Text="▷" FontSize="13" Foreground="#181615" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0"/>
                             </Border>
                         </Grid>
@@ -165,10 +171,10 @@
 
                         <Grid Margin="0,0,0,8">
                             <TextBlock Text="Поточний рівень стресу" FontSize="11" Foreground="#8E8A85" VerticalAlignment="Center"/>
-                            <TextBlock Text="Висока напруга (7 з 10)" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding StressText}" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Grid>
 
-                        <Slider Minimum="1" Maximum="10" Value="7" Margin="0,0,0,12"/>
+                        <Slider Minimum="1" Maximum="10" Value="{Binding StressLevel, Mode=TwoWay}" IsSnapToTickEnabled="True" TickFrequency="1" Margin="0,0,0,12"/>
 
                         <Grid Margin="0,0,0,20">
                             <TextBlock Text="1 (Повний спокій)" FontSize="10" Foreground="#8E8A85" HorizontalAlignment="Left"/>

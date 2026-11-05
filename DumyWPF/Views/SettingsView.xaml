@@ -83,7 +83,7 @@
                         <TextBlock Text="РЕЖИМ ЗА ЗАМОВЧУВАННЯМ ПРИ ЗАПУСКУ:" FontSize="10" FontWeight="Bold" Foreground="#C4C0B8" Margin="0,0,0,12"/>
 
                         <!-- Варіант 1 -->
-                        <RadioButton IsChecked="True" GroupName="DefaultMode" Margin="0,0,0,12">
+                        <RadioButton IsChecked="{Binding IsDailyMode}" GroupName="DefaultMode" Margin="0,0,0,12">
                             <StackPanel Margin="6,-2,0,0">
                                 <TextBlock Text="Щоденний баланс" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
                                 <TextBlock Text="Регулярний моніторинг настрою, трекер звичок та щоденник думок для підтримки загального ментального тонусу." 
@@ -92,7 +92,7 @@
                         </RadioButton>
 
                         <!-- Варіант 2 -->
-                        <RadioButton GroupName="DefaultMode" Margin="0,0,0,12">
+                        <RadioButton IsChecked="{Binding IsFocusMode}" GroupName="DefaultMode" Margin="0,0,0,12">
                             <StackPanel Margin="6,-2,0,0">
                                 <TextBlock Text="Фокус та Вигорання" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
                                 <TextBlock Text="Спеціалізовані інструменти тайм-менеджменту та аналітики продуктивності для запобігання професійному вигоранню." 
@@ -101,7 +101,7 @@
                         </RadioButton>
 
                         <!-- Варіант 3 -->
-                        <RadioButton GroupName="DefaultMode">
+                        <RadioButton IsChecked="{Binding IsTacticalMode}" GroupName="DefaultMode">
                             <StackPanel Margin="6,-2,0,0">
                                 <TextBlock Text="Тактичний" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
                                 <TextBlock Text="Швидкі SOS-практики заземлення, дихальні вправи та кризові сценарії стабілізації нервової системи." 
