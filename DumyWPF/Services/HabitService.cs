@@ -1,4 +1,4 @@
-using DumyWPF.Data;
+﻿using DumyWPF.Data;
 using DumyWPF.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +6,9 @@ namespace DumyWPF.Services
 {
     public class HabitService
     {
+        // Один запис у БД за раз: швидкі кліки не створюють дублів і не змагаються за файл.
+        private static readonly SemaphoreSlim Gate = new(1, 1);
+
         /// <summary>Стан звичок за сьогодні: назва звички -> виконано чи ні.</summary>
         public async Task<Dictionary<string, bool>> GetTodayAsync()
         {
@@ -25,6 +28,9 @@ namespace DumyWPF.Services
         /// <summary>Зберігає відмітку звички за сьогодні (оновлює запис, якщо він уже є).</summary>
         public async Task SetAsync(string habitName, bool isCompleted)
         {
+            await Gate.WaitAsync();
+            try
+            {
             using var db = new AppDbContext();
             var today = DateTime.Today;
             var tomorrow = today.AddDays(1);
@@ -48,6 +54,11 @@ namespace DumyWPF.Services
             }
 
             await db.SaveChangesAsync();
+            }
+            finally
+            {
+                Gate.Release();
+            }
         }
 
         /// <summary>Видаляє всі відмітки звичок.</summary>

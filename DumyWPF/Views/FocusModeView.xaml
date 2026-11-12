@@ -62,10 +62,17 @@
                             <TextBlock Text=" ∨" FontSize="10" Foreground="#C4C0B8" Margin="4,0,0,0"/>
                         </StackPanel>
                     </Border>
-                    <Border Background="#FBF9F5" CornerRadius="15" Width="30" Height="30" BorderBrush="#EAE6DF" BorderThickness="1">
-                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding NavigateSettingsCommand}"/></Border.InputBindings>
+
+                    <!-- Шестірня налаштувань -->
+                    <Button Command="{Binding NavigateSettingsCommand}" Width="30" Height="30" 
+                            Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" Cursor="Hand">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                        </Button.Resources>
                         <TextBlock Text="⚙" FontFamily="Segoe UI Emoji" FontSize="13" Foreground="#25190E" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Border>
@@ -74,11 +81,15 @@
         <StackPanel DockPanel.Dock="Bottom" Margin="0,15,0,15" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
                 <TextBlock Text="🧘 Переглянути бібліотеку практик" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#25190E" Cursor="Hand" Margin="0,0,20,0">
-                    <TextBlock.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding NavigateLibraryCommand}"/></TextBlock.InputBindings>
+                    <TextBlock.InputBindings>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding NavigateLibraryCommand}"/>
+                    </TextBlock.InputBindings>
                 </TextBlock>
-                <TextBlock Text="📊 Історія" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#25190E" Cursor="Hand">
-                    <TextBlock.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding NavigateHistoryCommand}"/></TextBlock.InputBindings>
-                </TextBlock>
+
+                <!-- Перехід в історію -->
+                <Button Command="{Binding NavigateHistoryCommand}" Background="Transparent" BorderThickness="0" Cursor="Hand">
+                    <TextBlock Text="📊 Історія" FontFamily="Segoe UI Emoji" FontSize="12" FontWeight="SemiBold" Foreground="#25190E"/>
+                </Button>
             </StackPanel>
             <TextBlock Text="Dumy v1.0 (MVP) піклується про вашу конфіденційність. Усі введені дані зберігаються локально." 
                        FontSize="10" Foreground="#C4C0B8" HorizontalAlignment="Center"/>
@@ -88,7 +99,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="35,20">
 
-                <!-- ДУМКА ДНЯ (ВИДІЛЕНО СІРО-БЛАКИТНИМ #EAEFF5 ТА #9AA3B6) -->
+                <!-- ДУМКА ДНЯ -->
                 <Border Background="#EAEFF5" BorderBrush="#9AA3B6" BorderThickness="1" CornerRadius="14" Padding="20,16" Margin="0,0,0,20">
                     <Grid>
                         <StackPanel>
@@ -112,98 +123,164 @@
 
                     <!-- ЛІВА КОЛОНКА -->
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="ЗОНА КОГНІТИВНОГО РОЗВАНТАЖЕННЯ" FontWeight="Bold" FontSize="16" Foreground="#25190E" Margin="0,0,0,4"/>
-                        <TextBlock Text="Швидке відновлення фокусу та зняття зорової напруги за допомогою науково обґрунтованих практик." 
-                                   FontSize="11" Foreground="#C4C0B8" TextWrapping="Wrap" Margin="0,0,0,15"/>
-
-                        <!-- ВПРАВА 1 -->
-                        <Border Background="White" CornerRadius="16" Padding="20,16" Margin="0,0,0,12">
-                            <Grid>
-                                <StackPanel VerticalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                                        <TextBlock Text="👀 " FontFamily="Segoe UI Emoji" FontSize="13"/>
-                                        <TextBlock Text="2-хв вправа для очей" FontWeight="Bold" FontSize="13" Foreground="#25190E"/>
-                                    </StackPanel>
-                                    <TextBlock Text="Для зняття напруги від монітора." FontSize="11" Foreground="#C4C0B8"/>
-                                </StackPanel>
-                                <Border Width="34" Height="34" CornerRadius="17" Background="#9AA3B6" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
-                                    <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding PlayEyesCommand}"/></Border.InputBindings>
-                                    <TextBlock Text="▷" FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0"/>
-                                </Border>
-                            </Grid>
-                        </Border>
-
-                        <!-- ВПРАВА 2 -->
-                        <Border Background="White" CornerRadius="16" Padding="20,16" Margin="0,0,0,20">
-                            <Grid>
-                                <StackPanel VerticalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                                        <TextBlock Text="🧠 " FontFamily="Segoe UI Emoji" FontSize="13"/>
-                                        <TextBlock Text="3-хв дихання 4-7-8" FontWeight="Bold" FontSize="13" Foreground="#25190E"/>
-                                    </StackPanel>
-                                    <TextBlock Text="Техніка «Пауза для розуму»" FontSize="11" Foreground="#C4C0B8"/>
-                                </StackPanel>
-                                <Border Width="34" Height="34" CornerRadius="17" Background="#9AA3B6" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
-                                    <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding PlayBreathingCommand}"/></Border.InputBindings>
-                                    <TextBlock Text="▷" FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0"/>
-                                </Border>
-                            </Grid>
-                        </Border>
-
                         <!-- РІВЕНЬ ВИСНАЖЕННЯ -->
-                        <Border Background="White" CornerRadius="16" Padding="20">
+                        <Border Background="White" CornerRadius="16" Padding="20" Margin="0,0,0,15">
                             <StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                                    <TextBlock Text="⚙ " FontFamily="Segoe UI Emoji" FontSize="13" Foreground="#25190E"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                                    <TextBlock Text="⚙ " FontFamily="Segoe UI Emoji" FontSize="14" Foreground="#9AA3B6" FontWeight="Bold"/>
                                     <TextBlock Text="РІВЕНЬ ВИСНАЖЕННЯ" FontWeight="Bold" FontSize="13" Foreground="#25190E"/>
                                 </StackPanel>
+
                                 <TextBlock Text="Оцініть свій поточний стан від повного відновлення до максимальної розумової втоми." 
-                                           FontSize="11" Foreground="#C4C0B8" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                           FontSize="11" Foreground="#C4C0B8" TextWrapping="Wrap" Margin="0,0,0,18"/>
 
-                                <Slider Minimum="1" Maximum="10" Value="{Binding FatigueLevel, Mode=TwoWay}" IsSnapToTickEnabled="True" TickFrequency="1" Margin="0,0,0,12"/>
-
-                                <Grid Margin="0,0,0,20">
-                                    <TextBlock Text="1 (Повний сил)" FontSize="10" FontWeight="Bold" Foreground="#25190E" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="{Binding FatigueText}" FontSize="10" FontWeight="Bold" Foreground="#25190E" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="10 (Виснажений)" FontSize="10" FontWeight="Bold" Foreground="#25190E" HorizontalAlignment="Right"/>
+                                <Grid Margin="0,0,0,8">
+                                    <TextBlock Text="Рівень втоми:" FontSize="11" Foreground="#C4C0B8" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding FatigueText}" FontSize="11" FontWeight="Bold" Foreground="#25190E" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                 </Grid>
 
-                                <!-- КНОПКА З БІЛИМ НАПИСОМ -->
-                                <Button Content="ЗАФІКСУВАТИ ВТОМУ" 
-                                        Command="{Binding LogFatigueCommand}"
-                                        Height="44" Background="#9AA3B6" Foreground="White" FontWeight="Bold" FontSize="12"
-                                        BorderThickness="0" Cursor="Hand">
-                                    <Button.Resources>
-                                        <Style TargetType="Border">
-                                            <Setter Property="CornerRadius" Value="12"/>
-                                        </Style>
-                                    </Button.Resources>
-                                </Button>
+                                <Slider Minimum="1" Maximum="10" Value="{Binding FatigueLevel, Mode=TwoWay}" IsSnapToTickEnabled="True" TickFrequency="1" Margin="0,0,0,5"/>
+
+                                <Grid>
+                                    <TextBlock Text="1 (Повний сил)" FontSize="10" Foreground="#C4C0B8" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="10 (Виснажений)" FontSize="10" Foreground="#C4C0B8" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Button Content="ЗАФІКСУВАТИ ВТОМУ" 
+                                Command="{Binding LogFatigueCommand}"
+                                Height="44" Background="#9AA3B6" Foreground="#25190E" FontWeight="Bold" FontSize="12"
+                                BorderThickness="0" Margin="0,0,0,15" Cursor="Hand">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="12"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <!-- ОСТАННЯ АКТИВНІСТЬ -->
+                        <Border Background="White" CornerRadius="16" Padding="20">
+                            <StackPanel>
+                                <TextBlock Text="ОСТАННЯ АКТИВНІСТЬ" FontWeight="Bold" FontSize="13" Foreground="#25190E" Margin="0,0,0,12"/>
+
+                                <TextBlock Text="Поки що немає записів. Зафіксуйте рівень втоми, і він з'явиться тут."
+                                           Visibility="{Binding EmptyVisibility}" FontSize="11" Foreground="#C4C0B8" TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+                                <ItemsControl ItemsSource="{Binding Recent}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#FBF9F5" CornerRadius="12" Padding="12,10" Margin="0,0,0,8" BorderBrush="#EAE6DF" BorderThickness="1">
+                                                <Grid>
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <Ellipse Width="8" Height="8" Fill="{Binding DotBrush}" Margin="0,0,8,0"/>
+                                                        <TextBlock Text="{Binding Summary}" FontSize="11" FontWeight="SemiBold" Foreground="#25190E"/>
+                                                    </StackPanel>
+                                                    <TextBlock Text="{Binding DateText}" FontSize="10" Foreground="#C4C0B8" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📊 " FontFamily="Segoe UI Emoji" FontSize="11"/>
+                                    <TextBlock Text="{Binding StatusMessage}" FontSize="10" FontWeight="Bold" Foreground="#25190E"/>
+                                </StackPanel>
                             </StackPanel>
                         </Border>
                     </StackPanel>
 
                     <!-- ПРАВА КОЛОНКА -->
                     <StackPanel Grid.Column="2">
-                        <!-- ШВИДКІ ЗВИЧКИ -->
+                        <!-- ЗОНА КОГНІТИВНОГО РОЗВАНТАЖЕННЯ (фіксовані практики) -->
                         <Border Background="White" CornerRadius="16" Padding="20" Margin="0,0,0,15">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,10">
+                                    <Border Background="#FBF9F5" CornerRadius="6" Padding="6,2" HorizontalAlignment="Left">
+                                        <TextBlock Text="DUMY РЕКОМЕНДУЄ" FontSize="9" FontWeight="Bold" Foreground="#9AA3B6"/>
+                                    </Border>
+                                    <TextBlock Text="Сьогоднішній фокус" FontSize="10" Foreground="#C4C0B8" HorizontalAlignment="Right"/>
+                                </Grid>
+
+                                <TextBlock Text="Зона когнітивного розвантаження" FontWeight="Bold" FontSize="15" Foreground="#25190E" Margin="0,0,0,6"/>
+                                <TextBlock Text="Швидке відновлення фокусу та зняття зорової напруги за допомогою науково обґрунтованих практик." 
+                                           FontSize="11" Foreground="#332418" TextWrapping="Wrap" Margin="0,0,0,12"/>
+
+                                <Border Background="#FBF9F5" CornerRadius="12" Padding="12,10" Margin="0,0,0,8" BorderBrush="#EAE6DF" BorderThickness="1">
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="👀" FontFamily="Segoe UI Emoji" FontSize="14" Margin="0,0,8,0"/>
+                                            <StackPanel>
+                                                <TextBlock Text="2-хв вправа для очей" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
+                                                <TextBlock Text="Для зняття напруги від монітора." FontSize="10" Foreground="#C4C0B8"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border Width="30" Height="30" CornerRadius="15" Background="#9AA3B6" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
+                                            <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding PlayEyesCommand}"/></Border.InputBindings>
+                                            <TextBlock Text="▷" FontSize="11" Foreground="#25190E" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <Border Background="#FBF9F5" CornerRadius="12" Padding="12,10" BorderBrush="#EAE6DF" BorderThickness="1">
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="🧠" FontFamily="Segoe UI Emoji" FontSize="14" Margin="0,0,8,0"/>
+                                            <StackPanel>
+                                                <TextBlock Text="3-хв дихання 4-7-8" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
+                                                <TextBlock Text="Техніка «Пауза для розуму»." FontSize="10" Foreground="#C4C0B8"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border Width="30" Height="30" CornerRadius="15" Background="#9AA3B6" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
+                                            <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding PlayBreathingCommand}"/></Border.InputBindings>
+                                            <TextBlock Text="▷" FontSize="11" Foreground="#25190E" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- ШВИДКІ ЗВИЧКИ -->
+                        <Border Background="White" CornerRadius="16" Padding="20">
                             <StackPanel>
                                 <TextBlock Text="ШВИДКІ ЗВИЧКИ" FontWeight="Bold" FontSize="13" Foreground="#25190E" Margin="0,0,0,12"/>
 
-                                <!-- Звичка 1 -->
-                                <ItemsControl ItemsSource="{Binding Recent}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border Background="#FBF9F5" CornerRadius="12" Padding="12,10" Margin="0,0,0,8" BorderBrush="#EAE6DF" BorderThickness="1">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="• " FontSize="12" Foreground="#C4C0B8"/>
-                                                    <TextBlock Text="{Binding Summary}" FontSize="11" FontWeight="SemiBold" Foreground="#25190E"/>
-                                                    <TextBlock Text="{Binding DateText, StringFormat=' · {0}'}" FontSize="10" Foreground="#C4C0B8" VerticalAlignment="Center"/>
-                                                </StackPanel>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                <Border Background="#FBF9F5" CornerRadius="12" Padding="12,10" Margin="0,0,0,8" BorderBrush="#EAE6DF" BorderThickness="1">
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="💧" FontFamily="Segoe UI Emoji" FontSize="14" Margin="0,0,8,0"/>
+                                            <StackPanel>
+                                                <TextBlock Text="Вода" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
+                                                <TextBlock Text="{Binding Habits.Water.Subtitle}" FontSize="10" Foreground="#C4C0B8"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <CheckBox IsChecked="{Binding Habits.Water.IsCompleted, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                                <Border Background="#FBF9F5" CornerRadius="12" Padding="12,10" Margin="0,0,0,8" BorderBrush="#EAE6DF" BorderThickness="1">
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="😴" FontFamily="Segoe UI Emoji" FontSize="14" Margin="0,0,8,0"/>
+                                            <StackPanel>
+                                                <TextBlock Text="Сон" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
+                                                <TextBlock Text="{Binding Habits.Sleep.Subtitle}" FontSize="10" Foreground="#C4C0B8"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <CheckBox IsChecked="{Binding Habits.Sleep.IsCompleted, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                                <Border Background="#FBF9F5" CornerRadius="12" Padding="12,10" BorderBrush="#EAE6DF" BorderThickness="1">
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="🎯" FontFamily="Segoe UI Emoji" FontSize="14" Margin="0,0,8,0"/>
+                                            <StackPanel>
+                                                <TextBlock Text="Фокус" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
+                                                <TextBlock Text="{Binding Habits.Focus.Subtitle}" FontSize="10" Foreground="#C4C0B8"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <CheckBox IsChecked="{Binding Habits.Focus.IsCompleted, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
                             </StackPanel>
                         </Border>
                     </StackPanel>

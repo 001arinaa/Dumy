@@ -1,4 +1,5 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using DumyWPF.Services;
 
@@ -16,6 +17,9 @@ namespace DumyWPF.ViewModels
 
         /// <summary>Останні записи («Остання активність»).</summary>
         public ObservableCollection<HistoryItemViewModel> Recent { get; } = new();
+
+        /// <summary>Підказка «Поки що немає записів» показується, поки список порожній.</summary>
+        public Visibility EmptyVisibility => Recent.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
         public ICommand LogFatigueCommand { get; }
         public ICommand PlayEyesCommand { get; }
@@ -84,6 +88,7 @@ namespace DumyWPF.ViewModels
             {
                 Recent.Add(new HistoryItemViewModel(entry));
             }
+            OnPropertyChanged(nameof(EmptyVisibility));
         }
 
         private async Task PlayAsync(string title)
