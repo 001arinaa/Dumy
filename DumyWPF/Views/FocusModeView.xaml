@@ -59,7 +59,7 @@
                     <Border Background="#FBF9F5" CornerRadius="12" Padding="12,6" Margin="0,0,10,0" BorderBrush="#EAE6DF" BorderThickness="1">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="• Фокус та Вигорання" FontSize="12" FontWeight="SemiBold" Foreground="#25190E"/>
-                            <TextBlock Text=" ∨" FontSize="10" Foreground="#C4C0B8" Margin="4,0,0,0"/>
+                            <TextBlock Text=" " FontSize="10" Foreground="#C4C0B8" Margin="4,0,0,0"/>
                         </StackPanel>
                     </Border>
                     <Border Background="#FBF9F5" CornerRadius="15" Width="30" Height="30" BorderBrush="#EAE6DF" BorderThickness="1">
@@ -97,7 +97,7 @@
                             </Border>
                             <TextBlock Text="«Фокус – це не просто концентрація зусиль, це вміння вчасно давати собі простір для видиху.»" 
                                        FontSize="15" FontWeight="Bold" Foreground="#25190E" TextWrapping="Wrap" Margin="0,0,0,4"/>
-                            <TextBlock Text="Dumy щоденне нагадування для запобігання емоційному виснаженню." FontSize="11" Foreground="#332418"/>
+                            <TextBlock Text="Dumy щоденне нагадування для запобігання емоційному виснаженню" FontSize="11" Foreground="#332418"/>
                         </StackPanel>
                         <TextBlock Text="💡" FontFamily="Segoe UI Emoji" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                     </Grid>
@@ -169,7 +169,7 @@
                                 </Grid>
 
                                 <!-- КНОПКА З БІЛИМ НАПИСОМ -->
-                                <Button Content="ЗАФІКСУВАТИ ВТОМУ  ➔" 
+                                <Button Content="ЗАФІКСУВАТИ ВТОМУ  " 
                                         Command="{Binding LogFatigueCommand}"
                                         Height="44" Background="#9AA3B6" Foreground="White" FontWeight="Bold" FontSize="12"
                                         BorderThickness="0" Cursor="Hand">
