@@ -1,4 +1,4 @@
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace DumyWPF.ViewModels
 {
@@ -6,7 +6,7 @@ namespace DumyWPF.ViewModels
     {
         private readonly MainViewModel _main;
         private string _userName = string.Empty;
-        private string _profile = AppProfiles.Daily;
+        private string _profile = string.Empty; // режим не обраний, доки користувач сам не клікне
 
         public string UserName
         {
@@ -51,6 +51,13 @@ namespace DumyWPF.ViewModels
 
             StartCommand = new RelayCommand(_ =>
             {
+                if (string.IsNullOrEmpty(_profile))
+                {
+                    System.Windows.MessageBox.Show("Будь ласка, оберіть режим роботи, щоб продовжити.",
+                        "Dumy", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    return;
+                }
+
                 _main.UserName = UserName.Trim();
                 _main.CurrentProfile = _profile;
                 _main.ShowHome();

@@ -181,7 +181,11 @@
                             <TextBlock Text="10 (Максимальний стрес)" FontSize="10" Foreground="#8E8A85" HorizontalAlignment="Right"/>
                         </Grid>
 
+<<<<<<< HEAD
                         <Button Content="ЗБЕРЕГТИ СТАН ТА СКОРИГУВАТИ ПРОТОКОЛ  " 
+=======
+                        <Button Content="ЗБЕРЕГТИ СТАН ТА СКОРИГУВАТИ ПРОТОКОЛ" 
+>>>>>>> 1173563 (UI fixes: onboarding default, SOS breathing animation, notes in history)
                                 Command="{Binding SaveTacticalStateCommand}"
                                 Height="44" Background="#A3A075" Foreground="#181615" FontWeight="Bold" FontSize="12"
                                 BorderThickness="0" Cursor="Hand">

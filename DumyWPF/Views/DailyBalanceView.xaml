@@ -227,7 +227,11 @@
                             </StackPanel>
                         </Border>
 
+<<<<<<< HEAD
                         <Button Content="ЗБЕРЕГТИ ТА ОТРИМАТИ РЕКОМЕНДАЦІЮ " 
+=======
+                        <Button Content="ЗБЕРЕГТИ ТА ОТРИМАТИ РЕКОМЕНДАЦІЮ" 
+>>>>>>> 1173563 (UI fixes: onboarding default, SOS breathing animation, notes in history)
                                 Command="{Binding SaveMoodCommand}"
                                 Height="44" Background="#DAB6C8" Foreground="#25190E" FontWeight="Bold" FontSize="12"
                                 BorderThickness="0" Margin="0,0,0,15" Cursor="Hand" Click="Button_Click">

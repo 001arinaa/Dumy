@@ -1,4 +1,4 @@
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using DumyWPF.Services;
 
 namespace DumyWPF.ViewModels
@@ -63,8 +63,9 @@ namespace DumyWPF.ViewModels
             await _moodService.SaveMoodAsync(MoodStates.Sos, StressValue, "Швидке SOS-заземлення");
             StatusMessage = "✓ SOS зафіксовано в історії";
 
-            var practice = await _practiceService.GetByTitleAsync(PracticeTitles.Sos);
-            PracticeLauncher.Open(practice);
+            // Окреме вікно з анімацією дихання
+            var window = new Views.SosWindow { Owner = System.Windows.Application.Current.MainWindow };
+            window.ShowDialog();
         }
 
         /// <summary>Експрес-фіксація стану (слайдер стресу).</summary>
