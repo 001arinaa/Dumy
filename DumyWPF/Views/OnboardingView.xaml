@@ -20,13 +20,40 @@
                 </Border>
 
                 <!-- Ввід імені -->
-                <TextBlock Text="Як до вас звертатися? Введіть ім'я:" FontSize="12" FontWeight="Bold" 
+                <TextBlock Text="Як до вас звертатися?" FontSize="12" FontWeight="Bold" 
                            Foreground="#25190E" HorizontalAlignment="Left" Margin="0,0,0,8"/>
 
-                <Border BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="10" Padding="12,8" 
-                        Background="White" Margin="0,0,0,20">
-                    <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" 
-                             FontSize="13" BorderThickness="0" Background="Transparent" Foreground="#25190E"/>
+                <!-- Поле вводу з інтегрованим плейсхолдером -->
+                <Border BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="10" 
+                        Background="White" Margin="0,0,0,20" Height="40">
+                    <Grid VerticalAlignment="Center">
+                        <TextBox x:Name="NameTextBox"
+                                 Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="13" 
+                                 BorderThickness="0" 
+                                 Background="Transparent" 
+                                 Foreground="#25190E"
+                                 VerticalContentAlignment="Center"
+                                 Padding="12,0"/>
+
+                        <TextBlock Text="Введіть ваше ім'я..."
+                                   IsHitTestVisible="False"
+                                   Foreground="#C4C0B8"
+                                   FontSize="13"
+                                   Margin="14,0,0,0"
+                                   VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=NameTextBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
                 </Border>
 
                 <!-- Вибір режиму -->
@@ -58,7 +85,9 @@
                                 </Style.Triggers>
                             </Style>
                         </Border.Style>
-                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding SelectDailyCommand}"/></Border.InputBindings>
+                        <Border.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding SelectDailyCommand}"/>
+                        </Border.InputBindings>
                         <StackPanel>
                             <Grid Margin="0,0,0,10">
                                 <TextBlock Text="🤍" FontSize="14" HorizontalAlignment="Left"/>
@@ -85,7 +114,9 @@
                                 </Style.Triggers>
                             </Style>
                         </Border.Style>
-                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding SelectFocusCommand}"/></Border.InputBindings>
+                        <Border.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding SelectFocusCommand}"/>
+                        </Border.InputBindings>
                         <StackPanel>
                             <Grid Margin="0,0,0,10">
                                 <TextBlock Text="⚙" FontSize="14" HorizontalAlignment="Left"/>
@@ -112,7 +143,9 @@
                                 </Style.Triggers>
                             </Style>
                         </Border.Style>
-                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding SelectTacticalCommand}"/></Border.InputBindings>
+                        <Border.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding SelectTacticalCommand}"/>
+                        </Border.InputBindings>
                         <StackPanel>
                             <Grid Margin="0,0,0,10">
                                 <TextBlock Text="🛡" FontSize="14" HorizontalAlignment="Left"/>

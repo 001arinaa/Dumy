@@ -46,7 +46,7 @@
                     <Border Background="#FBF9F5" CornerRadius="12" Padding="12,6" Margin="0,0,10,0" BorderBrush="#EAE6DF" BorderThickness="1">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="• Налаштування" FontSize="12" FontWeight="SemiBold" Foreground="#25190E"/>
-                            <TextBlock Text=" ∨" FontSize="10" Foreground="#C4C0B8" Margin="4,0,0,0"/>
+                            <TextBlock Text=" " FontSize="10" Foreground="#C4C0B8" Margin="4,0,0,0"/>
                         </StackPanel>
                     </Border>
                     <Border Background="#DAB6C8" CornerRadius="15" Width="30" Height="30">
@@ -68,7 +68,7 @@
 
                 <!-- ЗАГОЛОВОК СТОРІНКИ -->
                 <TextBlock Text="НАЛАШТУВАННЯ ЗАСТОСУНКУ" FontWeight="Bold" FontSize="22" Foreground="#25190E" Margin="0,0,0,4"/>
-                <TextBlock Text="Персоналізуйте ваш досвід роботи з Dumy та керуйте приватністю ваших даних." 
+                <TextBlock Text="Персоналізуйте ваш досвід роботи з Dumy та керуйте приватністю ваших даних" 
                            FontSize="12" Foreground="#C4C0B8" Margin="0,0,0,20"/>
 
                 <!-- КАРТКА 1: ПРОФІЛЬ ТА РЕЖИМИ -->
@@ -94,7 +94,7 @@
                         <!-- Варіант 2 -->
                         <RadioButton IsChecked="{Binding IsFocusMode}" GroupName="DefaultMode" Margin="0,0,0,12">
                             <StackPanel Margin="6,-2,0,0">
-                                <TextBlock Text="Відновлення та фокус" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
+                                <TextBlock Text="Фокус та Вигорання" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
                                 <TextBlock Text="Спеціалізовані інструменти тайм-менеджменту та аналітики продуктивності для запобігання професійному вигоранню." 
                                            FontSize="11" Foreground="#C4C0B8" TextWrapping="Wrap"/>
                             </StackPanel>
@@ -143,7 +143,7 @@
                 </Border>
 
                 <!-- КАРТКА 3: КОНФІДЕНЦІЙНІСТЬ ТА ДАНІ -->
-                <Border Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="16" Padding="24,20" Margin="0,0,0,20">
+                <Border Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="16" Padding="24,20" Margin="0,0,0,12">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                             <TextBlock Text="🛡 " FontFamily="Segoe UI Emoji" FontSize="13" Foreground="#25190E"/>
@@ -152,15 +152,15 @@
                         <Border BorderBrush="#EAE6DF" BorderThickness="0,0,0,1" Margin="0,0,0,16"/>
 
                         <!-- Плашка зі сповіщенням -->
-                        <Border Background="#EAE6DF" CornerRadius="10" Padding="14,10" Margin="0,0,16,0">
+                        <Border Background="#EAE6DF" CornerRadius="10" Padding="14,10" Margin="0,0,0,16">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Text="🔒 " FontFamily="Segoe UI Emoji" FontSize="12"/>
-                                <TextBlock Text="Усі ваші дані зберігаються локально в локальній SQLite базі даних безпосередньо на цьому пристрої." 
+                                <TextBlock Text="Усі ваші дані зберігаються локально в шифрованій SQLite базі даних безпосередньо на цьому пристрої." 
                                            FontSize="11" FontWeight="SemiBold" Foreground="#25190E"/>
                             </StackPanel>
                         </Border>
 
-                        <Grid Margin="0,16,0,0">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="15"/>
@@ -195,6 +195,24 @@
                         </Grid>
                     </StackPanel>
                 </Border>
+
+                <!-- ДРІБНИЙ СТАТУС-ТЕКСТ ВНИЗУ (Автоматично ховається, якщо текст пустий) -->
+                <TextBlock Text="{Binding StatusMessage}" 
+                           FontSize="11" 
+                           Foreground="#7A6E65" 
+                           HorizontalAlignment="Left" 
+                           Margin="4,0,0,16">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StatusMessage}" Value="">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
 
                 <!-- НИЖНІ КНОПКИ ДІЙ -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">

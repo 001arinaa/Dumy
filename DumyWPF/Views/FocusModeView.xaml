@@ -59,7 +59,7 @@
                     <Border Background="#FBF9F5" CornerRadius="12" Padding="12,6" Margin="0,0,10,0" BorderBrush="#EAE6DF" BorderThickness="1">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="• Відновлення та фокус" FontSize="12" FontWeight="SemiBold" Foreground="#25190E"/>
-                            <TextBlock Text=" ∨" FontSize="10" Foreground="#C4C0B8" Margin="4,0,0,0"/>
+                            <TextBlock Text=" " FontSize="10" Foreground="#C4C0B8" Margin="4,0,0,0"/>
                         </StackPanel>
                     </Border>
 
@@ -141,10 +141,29 @@
 
                                 <Slider Minimum="1" Maximum="10" Value="{Binding FatigueLevel, Mode=TwoWay}" IsSnapToTickEnabled="True" TickFrequency="1" Margin="0,0,0,5"/>
 
-                                <Grid>
+                                <Grid Margin="0,0,0,12">
                                     <TextBlock Text="1 (Повний сил)" FontSize="10" Foreground="#C4C0B8" HorizontalAlignment="Left"/>
                                     <TextBlock Text="10 (Виснажений)" FontSize="10" Foreground="#C4C0B8" HorizontalAlignment="Right"/>
                                 </Grid>
+
+                                <!-- СТАТУСНЕ ПОВІДОМЛЕННЯ (тепер під слайдером втоми) -->
+                                <TextBlock Text="{Binding StatusMessage}" 
+                                           FontSize="11" 
+                                           FontWeight="Bold" 
+                                           Foreground="#25190E" 
+                                           HorizontalAlignment="Left" 
+                                           Margin="2,0,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding StatusMessage}" Value="">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                             </StackPanel>
                         </Border>
 
@@ -182,11 +201,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="📊 " FontFamily="Segoe UI Emoji" FontSize="11"/>
-                                    <TextBlock Text="{Binding StatusMessage}" FontSize="10" FontWeight="Bold" Foreground="#25190E"/>
-                                </StackPanel>
+                                <!-- Звідси статус прибрано -->
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -217,7 +232,9 @@
                                             </StackPanel>
                                         </StackPanel>
                                         <Border Width="30" Height="30" CornerRadius="15" Background="#9AA3B6" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
-                                            <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding PlayEyesCommand}"/></Border.InputBindings>
+                                            <Border.InputBindings>
+                                                <MouseBinding Gesture="LeftClick" Command="{Binding PlayEyesCommand}"/>
+                                            </Border.InputBindings>
                                             <TextBlock Text="▷" FontSize="11" Foreground="#25190E" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0"/>
                                         </Border>
                                     </Grid>
@@ -232,7 +249,9 @@
                                             </StackPanel>
                                         </StackPanel>
                                         <Border Width="30" Height="30" CornerRadius="15" Background="#9AA3B6" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
-                                            <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding PlayBreathingCommand}"/></Border.InputBindings>
+                                            <Border.InputBindings>
+                                                <MouseBinding Gesture="LeftClick" Command="{Binding PlayBreathingCommand}"/>
+                                            </Border.InputBindings>
                                             <TextBlock Text="▷" FontSize="11" Foreground="#25190E" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0"/>
                                         </Border>
                                     </Grid>

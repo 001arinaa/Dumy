@@ -14,6 +14,7 @@ namespace DumyWPF.ViewModels
         private readonly HabitService _habitService = new();
 
         private string _profile;
+        private string _statusMessage = string.Empty;
 
         public bool IsDailyMode
         {
@@ -33,6 +34,16 @@ namespace DumyWPF.ViewModels
             set { if (value) SelectProfile(AppProfiles.Tactical); }
         }
 
+        public string StatusMessage
+        {
+            get => _statusMessage;
+            set
+            {
+                _statusMessage = value;
+                OnPropertyChanged(nameof(StatusMessage));
+            }
+        }
+
         public ICommand ClearHistoryCommand { get; }
         public ICommand BackupDataCommand { get; }
         public ICommand CancelSettingsCommand { get; }
@@ -46,6 +57,7 @@ namespace DumyWPF.ViewModels
             SaveSettingsCommand = new RelayCommand(_ =>
             {
                 Main.CurrentProfile = _profile;
+                StatusMessage = "Налаштування успішно збережено.";
                 Main.ShowHome();
             });
             ClearHistoryCommand = new RelayCommand(async _ => await RunSafeAsync(ClearHistoryAsync));
@@ -63,16 +75,19 @@ namespace DumyWPF.ViewModels
 
         private async Task ClearHistoryAsync()
         {
+            // 1. Питаємо підтвердження через діалогове вікно (як ти й хотіла)
             var answer = MessageBox.Show(
                 "Видалити всю локальну історію настрою та відмітки звичок? Цю дію не можна скасувати.",
                 "Очистити історію", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (answer != MessageBoxResult.Yes) return;
 
+            // 2. Очищаємо дані
             await _moodService.ClearHistoryAsync();
             await _habitService.ClearAllAsync();
 
-            MessageBox.Show("Історію очищено.", "Dumy", MessageBoxButton.OK, MessageBoxImage.Information);
+            // 3. Замість другого вікна «Ок» виводимо статусний текст знизу
+            StatusMessage = "Локальну історію успішно очищено.";
         }
 
         private Task BackupAsync()
@@ -88,8 +103,7 @@ namespace DumyWPF.ViewModels
             {
                 SqliteConnection.ClearAllPools(); // відпускаємо файл бази перед копіюванням
                 File.Copy(AppDbContext.DbPath, dialog.FileName, true);
-                MessageBox.Show("Резервну копію збережено:\n" + dialog.FileName, "Dumy",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                StatusMessage = "Резервну копію успішно створено.";
             }
 
             return Task.CompletedTask;
