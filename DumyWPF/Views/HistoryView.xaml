@@ -150,8 +150,12 @@
                                                         <Ellipse Width="8" Height="8" Fill="{Binding DotBrush}" Margin="0,0,8,0"/>
                                                         <TextBlock Text="{Binding DateText}" FontSize="10" Foreground="#C4C0B8" VerticalAlignment="Center"/>
                                                     </StackPanel>
-                                                    <TextBlock Grid.Column="1" Text="{Binding Summary}" FontSize="11" FontWeight="Bold" Foreground="#25190E"
-                                                               HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                                    <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Summary}" FontSize="11" FontWeight="Bold" Foreground="#25190E"
+                                                                   HorizontalAlignment="Right" TextWrapping="Wrap"/>
+                                                        <TextBlock Text="{Binding Notes}" FontSize="10" Foreground="#8a8279" FontStyle="Italic"
+                                                                   HorizontalAlignment="Right" TextWrapping="Wrap" MaxWidth="260"/>
+                                                    </StackPanel>
                                                 </Grid>
                                             </Border>
                                         </DataTemplate>
