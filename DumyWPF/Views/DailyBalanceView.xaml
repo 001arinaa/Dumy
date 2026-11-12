@@ -106,7 +106,7 @@
                             <Border Background="#DAB6C8" CornerRadius="6" Padding="8,3" HorizontalAlignment="Left" Margin="0,0,0,8">
                                 <TextBlock Text="ДУМКА ДНЯ" FontSize="9" FontWeight="Bold" Foreground="White"/>
                             </Border>
-                            <TextBlock Text="«Твоя сила – у твоєму спокої. Кожен видих звільняє місце для нового балансу.»" 
+                            <TextBlock Text="«Твоя сила – у твоєму спокої. Кожен видих звільняє місце для нового балансу»" 
                                        FontSize="15" FontWeight="Bold" Foreground="#25190E" TextWrapping="Wrap" Margin="0,0,0,4"/>
                             <TextBlock Text="Dumy щоденне нагадування для збереження гармонії." FontSize="11" Foreground="#332418"/>
                         </StackPanel>

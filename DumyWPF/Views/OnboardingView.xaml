@@ -19,14 +19,41 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Ввід імені -->
-                <TextBlock Text="Як до вас звертатися? (Введіть ім'я)" FontSize="12" FontWeight="Bold" 
+                <!-- БЛОК ВВОДУ ІМЕНІ З ПЛЕЙСХОЛДЕРОМ ВСЕРЕДИНІ -->
+                <TextBlock Text="Як до вас звертатися?" FontSize="12" FontWeight="Bold" 
                            Foreground="#25190E" HorizontalAlignment="Left" Margin="0,0,0,8"/>
 
-                <Border BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="10" Padding="12,8" 
-                        Background="White" Margin="0,0,0,20">
-                    <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" 
-                             FontSize="13" BorderThickness="0" Background="Transparent" Foreground="#25190E"/>
+                <Border Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Height="44" Padding="14,0" Margin="0,0,0,20">
+                    <Grid VerticalAlignment="Center">
+                        <!-- Плейсхолдер всередині блоку (видно тільки коли поле пусте) -->
+                        <TextBlock Text="Введіть ваше ім'я..." 
+                                   FontSize="13" 
+                                   Foreground="#C4C0B8" 
+                                   VerticalAlignment="Center"
+                                   IsHitTestVisible="False">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding UserName}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding UserName}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <!-- Саме поле вводу -->
+                        <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" 
+                                 FontSize="13" 
+                                 BorderThickness="0" 
+                                 Background="Transparent" 
+                                 Foreground="#25190E"
+                                 VerticalContentAlignment="Center"/>
+                    </Grid>
                 </Border>
 
                 <!-- Вибір режиму -->
@@ -43,8 +70,10 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Картка 1: Щоденний баланс -->
-                    <Border Grid.Column="0" Background="#FBF9F5" BorderBrush="#DAB6C8" BorderThickness="1.5" CornerRadius="12" Padding="10">
-                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding SelectDailyCommand}"/></Border.InputBindings>
+                    <Border Grid.Column="0" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="10">
+                        <Border.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding SelectDailyCommand}"/>
+                        </Border.InputBindings>
                         <StackPanel>
                             <Grid Margin="0,0,0,10">
                                 <TextBlock Text="🤍" FontSize="14" HorizontalAlignment="Left"/>
@@ -56,8 +85,10 @@
                     </Border>
 
                     <!-- Картка 2: Відновлення та фокус -->
-                    <Border Grid.Column="2" Background="White" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="10">
-                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding SelectFocusCommand}"/></Border.InputBindings>
+                    <Border Grid.Column="2" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="10">
+                        <Border.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding SelectFocusCommand}"/>
+                        </Border.InputBindings>
                         <StackPanel>
                             <Grid Margin="0,0,0,10">
                                 <TextBlock Text="⚙" FontSize="14" HorizontalAlignment="Left"/>
@@ -69,8 +100,10 @@
                     </Border>
 
                     <!-- Картка 3: Тактичний -->
-                    <Border Grid.Column="4" Background="White" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="10">
-                        <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding SelectTacticalCommand}"/></Border.InputBindings>
+                    <Border Grid.Column="4" Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="12" Padding="10">
+                        <Border.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding SelectTacticalCommand}"/>
+                        </Border.InputBindings>
                         <StackPanel>
                             <Grid Margin="0,0,0,10">
                                 <TextBlock Text="🛡" FontSize="14" HorizontalAlignment="Left"/>
