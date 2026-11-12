@@ -14,6 +14,13 @@ namespace DumyWPF.ViewModels
         private readonly HabitService _habitService = new();
 
         private string _profile;
+        private string _statusMessage;
+
+        public string StatusMessage
+        {
+            get => _statusMessage;
+            set { _statusMessage = value; OnPropertyChanged(); }
+        }
 
         public bool IsDailyMode
         {
@@ -72,7 +79,8 @@ namespace DumyWPF.ViewModels
             await _moodService.ClearHistoryAsync();
             await _habitService.ClearAllAsync();
 
-            MessageBox.Show("Історію очищено.", "Dumy", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Виводимо статус дрібним текстом замість модального вікна
+            StatusMessage = "✓ Історію успішно очищено.";
         }
 
         private Task BackupAsync()
@@ -88,8 +96,9 @@ namespace DumyWPF.ViewModels
             {
                 SqliteConnection.ClearAllPools(); // відпускаємо файл бази перед копіюванням
                 File.Copy(AppDbContext.DbPath, dialog.FileName, true);
-                MessageBox.Show("Резервну копію збережено:\n" + dialog.FileName, "Dumy",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Виводимо шлях резервної копії як статусний текст
+                StatusMessage = "✓ Резервну копію збережено: " + Path.GetFileName(dialog.FileName);
             }
 
             return Task.CompletedTask;

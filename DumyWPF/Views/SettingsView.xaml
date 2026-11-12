@@ -143,7 +143,7 @@
                 </Border>
 
                 <!-- КАРТКА 3: КОНФІДЕНЦІЙНІСТЬ ТА ДАНІ -->
-                <Border Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="16" Padding="24,20" Margin="0,0,0,20">
+                <Border Background="#FBF9F5" BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="16" Padding="24,20" Margin="0,0,0,12">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                             <TextBlock Text="🛡 " FontFamily="Segoe UI Emoji" FontSize="13" Foreground="#25190E"/>
@@ -152,7 +152,7 @@
                         <Border BorderBrush="#EAE6DF" BorderThickness="0,0,0,1" Margin="0,0,0,16"/>
 
                         <!-- Плашка зі сповіщенням -->
-                        <Border Background="#EAE6DF" CornerRadius="10" Padding="14,10" Margin="0,0,16,0">
+                        <Border Background="#EAE6DF" CornerRadius="10" Padding="14,10" Margin="0,0,0,16">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Text="🔒 " FontFamily="Segoe UI Emoji" FontSize="12"/>
                                 <TextBlock Text="Усі ваші дані зберігаються локально в шифрованій SQLite базі даних безпосередньо на цьому пристрої." 
@@ -160,7 +160,7 @@
                             </StackPanel>
                         </Border>
 
-                        <Grid Margin="0,16,0,0">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="15"/>
@@ -188,13 +188,20 @@
                                     </Style>
                                 </Button.Resources>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="📥 " FontFamily="Segoe UI Emoji" FontSize="11"/>
+                                    <TextBlock Text="📥 " FontFamily="Segoe UIEmoji" FontSize="11"/>
                                     <TextBlock Text="Резервне копіювання" FontSize="11" FontWeight="Bold" Foreground="#25190E"/>
                                 </StackPanel>
                             </Button>
                         </Grid>
                     </StackPanel>
                 </Border>
+
+                <!-- ДРІБНИЙ СТАТУС-ТЕКСТ ВНИЗУ (Замість спливаючого вікна MessageBox) -->
+                <TextBlock Text="{Binding StatusMessage}" 
+                           FontSize="11" 
+                           Foreground="#7A6E65" 
+                           HorizontalAlignment="Left" 
+                           Margin="4,0,0,16"/>
 
                 <!-- НИЖНІ КНОПКИ ДІЙ -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
