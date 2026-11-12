@@ -30,7 +30,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="35,20">
                 <TextBlock Text="БІБЛІОТЕКА ПРАКТИК" FontWeight="Bold" FontSize="20" Foreground="#25190E" Margin="0,0,0,2"/>
-                <TextBlock Text="Оберіть профіль і стан, щоб відфільтрувати практики" FontSize="12" Foreground="#C4C0B8" Margin="0,0,0,16"/>
+                <TextBlock Text="Оберіть профіль і стан, щоб відфільтрувати практики." FontSize="12" Foreground="#C4C0B8" Margin="0,0,0,16"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                     <TextBlock Text="Профіль:" VerticalAlignment="Center" FontSize="12" Foreground="#25190E" Margin="0,0,8,0"/>

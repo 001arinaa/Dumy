@@ -20,7 +20,7 @@
                 </Border>
 
                 <!-- Ввід імені -->
-                <TextBlock Text="Як до вас звертатися? (Введіть ім'я)" FontSize="12" FontWeight="Bold" 
+                <TextBlock Text="Як до вас звертатися? Введіть ім'я:" FontSize="12" FontWeight="Bold" 
                            Foreground="#25190E" HorizontalAlignment="Left" Margin="0,0,0,8"/>
 
                 <Border BorderBrush="#EAE6DF" BorderThickness="1" CornerRadius="10" Padding="12,8" 
@@ -125,7 +125,7 @@
                 </Grid>
 
                 <!-- Кнопка старту -->
-                <Button Content="Розпочати роботу  ➔" 
+                <Button Content="Розпочати роботу" 
                         Command="{Binding StartCommand}"
                         Height="42" Width="260" Background="#DAB6C8" Foreground="#25190E" 
                         FontWeight="Bold" FontSize="12" BorderThickness="0" Cursor="Hand" Margin="0,0,0,15">

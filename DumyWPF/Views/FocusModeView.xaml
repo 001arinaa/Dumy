@@ -58,7 +58,7 @@
                     <TextBlock Text="Режим роботи:" VerticalAlignment="Center" Foreground="#C4C0B8" FontSize="12" Margin="0,0,8,0"/>
                     <Border Background="#FBF9F5" CornerRadius="12" Padding="12,6" Margin="0,0,10,0" BorderBrush="#EAE6DF" BorderThickness="1">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="• Фокус та Вигорання" FontSize="12" FontWeight="SemiBold" Foreground="#25190E"/>
+                            <TextBlock Text="• Відновлення та фокус" FontSize="12" FontWeight="SemiBold" Foreground="#25190E"/>
                             <TextBlock Text=" ∨" FontSize="10" Foreground="#C4C0B8" Margin="4,0,0,0"/>
                         </StackPanel>
                     </Border>
@@ -124,7 +124,7 @@
                                         <TextBlock Text="👀 " FontFamily="Segoe UI Emoji" FontSize="13"/>
                                         <TextBlock Text="2-хв вправа для очей" FontWeight="Bold" FontSize="13" Foreground="#25190E"/>
                                     </StackPanel>
-                                    <TextBlock Text="Для зняття напруги від монітора" FontSize="11" Foreground="#C4C0B8"/>
+                                    <TextBlock Text="Для зняття напруги від монітора." FontSize="11" Foreground="#C4C0B8"/>
                                 </StackPanel>
                                 <Border Width="34" Height="34" CornerRadius="17" Background="#9AA3B6" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
                                     <Border.InputBindings><MouseBinding Gesture="LeftClick" Command="{Binding PlayEyesCommand}"/></Border.InputBindings>
@@ -169,7 +169,7 @@
                                 </Grid>
 
                                 <!-- КНОПКА З БІЛИМ НАПИСОМ -->
-                                <Button Content="ЗАФІКСУВАТИ ВТОМУ  ➔" 
+                                <Button Content="ЗАФІКСУВАТИ ВТОМУ" 
                                         Command="{Binding LogFatigueCommand}"
                                         Height="44" Background="#9AA3B6" Foreground="White" FontWeight="Bold" FontSize="12"
                                         BorderThickness="0" Cursor="Hand">

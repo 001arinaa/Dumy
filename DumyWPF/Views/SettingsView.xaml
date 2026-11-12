@@ -68,7 +68,7 @@
 
                 <!-- ЗАГОЛОВОК СТОРІНКИ -->
                 <TextBlock Text="НАЛАШТУВАННЯ ЗАСТОСУНКУ" FontWeight="Bold" FontSize="22" Foreground="#25190E" Margin="0,0,0,4"/>
-                <TextBlock Text="Персоналізуйте ваш досвід роботи з Dumy та керуйте приватністю ваших даних" 
+                <TextBlock Text="Персоналізуйте ваш досвід роботи з Dumy та керуйте приватністю ваших даних." 
                            FontSize="12" Foreground="#C4C0B8" Margin="0,0,0,20"/>
 
                 <!-- КАРТКА 1: ПРОФІЛЬ ТА РЕЖИМИ -->
@@ -94,7 +94,7 @@
                         <!-- Варіант 2 -->
                         <RadioButton IsChecked="{Binding IsFocusMode}" GroupName="DefaultMode" Margin="0,0,0,12">
                             <StackPanel Margin="6,-2,0,0">
-                                <TextBlock Text="Фокус та Вигорання" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
+                                <TextBlock Text="Відновлення та фокус" FontWeight="Bold" FontSize="12" Foreground="#25190E"/>
                                 <TextBlock Text="Спеціалізовані інструменти тайм-менеджменту та аналітики продуктивності для запобігання професійному вигоранню." 
                                            FontSize="11" Foreground="#C4C0B8" TextWrapping="Wrap"/>
                             </StackPanel>
@@ -155,7 +155,7 @@
                         <Border Background="#EAE6DF" CornerRadius="10" Padding="14,10" Margin="0,0,16,0">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Text="🔒 " FontFamily="Segoe UI Emoji" FontSize="12"/>
-                                <TextBlock Text="Усі ваші дані зберігаються локально в шифрованій SQLite базі даних безпосередньо на цьому пристрої." 
+                                <TextBlock Text="Усі ваші дані зберігаються локально в локальній SQLite базі даних безпосередньо на цьому пристрої." 
                                            FontSize="11" FontWeight="SemiBold" Foreground="#25190E"/>
                             </StackPanel>
                         </Border>
