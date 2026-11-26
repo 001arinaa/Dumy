@@ -31,29 +31,29 @@ namespace DumyWPF.Services
             await Gate.WaitAsync();
             try
             {
-            using var db = new AppDbContext();
-            var today = DateTime.Today;
-            var tomorrow = today.AddDays(1);
+                using var db = new AppDbContext();
+                var today = DateTime.Today;
+                var tomorrow = today.AddDays(1);
 
-            var log = await db.HabitLogs.FirstOrDefaultAsync(h =>
-                h.HabitName == habitName && h.Date >= today && h.Date < tomorrow);
+                var log = await db.HabitLogs.FirstOrDefaultAsync(h =>
+                    h.HabitName == habitName && h.Date >= today && h.Date < tomorrow);
 
-            if (log == null)
-            {
-                db.HabitLogs.Add(new HabitLog
+                if (log == null)
                 {
-                    Date = DateTime.Now,
-                    HabitName = habitName,
-                    IsCompleted = isCompleted
-                });
-            }
-            else
-            {
-                log.IsCompleted = isCompleted;
-                log.Date = DateTime.Now;
-            }
+                    db.HabitLogs.Add(new HabitLog
+                    {
+                        Date = DateTime.Now,
+                        HabitName = habitName,
+                        IsCompleted = isCompleted
+                    });
+                }
+                else
+                {
+                    log.IsCompleted = isCompleted;
+                    log.Date = DateTime.Now;
+                }
 
-            await db.SaveChangesAsync();
+                await db.SaveChangesAsync();
             }
             finally
             {
