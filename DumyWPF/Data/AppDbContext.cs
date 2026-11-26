@@ -1,4 +1,4 @@
-
+﻿
 using System.IO;
 using DumyWPF.Models;
 using Microsoft.EntityFrameworkCore;
@@ -15,11 +15,16 @@ namespace DumyWPF.Data
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
+        /// <summary>Лише для автотестів: окремий файл бази, щоб тести не чіпали реальні дані.</summary>
+        public static string? DbPathOverride { get; set; }
+
         /// <summary>Шлях до файлу бази: %LocalAppData%\Dumy\dumy.db</summary>
         public static string DbPath
         {
             get
             {
+                if (!string.IsNullOrEmpty(DbPathOverride)) return DbPathOverride;
+
                 var folder = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Dumy");
                 Directory.CreateDirectory(folder);
