@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Find projects
+        shell: pwsh
+        run: |
+          $app = Get-ChildItem -Recurse -Filter DumyWPF.csproj | Select-Object -First 1
+          $tests = Get-ChildItem -Recurse -Filter "*Tests*.csproj" | Select-Object -First 1
+          "APP_PROJECT=$($app.FullName)" >> $env:GITHUB_ENV
+          "TEST_PROJECT=$($tests.FullName)" >> $env:GITHUB_ENV
+
+      - name: Build
+        run: dotnet build "${{ env.APP_PROJECT }}" -c Release
+
+      - name: Test
+        run: dotnet test "${{ env.TEST_PROJECT }}" -c Release --logger "trx;LogFileName=test-results.trx" --results-directory TestResults
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults
+
+      - name: Code style check (does not block)
+        continue-on-error: true
+        run: dotnet format "${{ env.APP_PROJECT }}" --verify-no-changes
